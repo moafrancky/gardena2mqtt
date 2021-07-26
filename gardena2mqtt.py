@@ -9,12 +9,14 @@ import paho.mqtt.client as mqtt
 
 def publish_device(device):
     infos = {"datetime":time.strftime("%Y-%m-%d %H:%M:%S")}
+    deviceLocation = device.location.name.replace(" ", "_")
+
     for attrName in vars(device):
         if not attrName.startswith('_') and attrName not in ('location', 'callbacks'):
-            infos[attrName] = getattr(device, attrName)
+            attrValue = getattr(device, attrName)
+            mqttclient.publish(f"{mqttprefix}/{deviceLocation}/{device.name}/{attrName}", attrValue)
 
-    devicelocation = device.location.name.replace(" ", "_")
-    mqttclient.publish(f"{mqttprefix}/{devicelocation}/{device.name}", json.dumps(infos))
+
 
 def publish_everything():
     global smart_system
