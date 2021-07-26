@@ -12,7 +12,9 @@ def publish_device(device):
     for attrName in vars(device):
         if not attrName.startswith('_') and attrName not in ('location', 'callbacks'):
             infos[attrName] = getattr(device, attrName)
-    mqttclient.publish(f"{mqttprefix}/{device.location.name}/{device.name}", json.dumps(infos))
+
+    devicelocation = device.location.name.replace(" ", "_")
+    mqttclient.publish(f"{mqttprefix}/{devicelocation}/{device.name}", json.dumps(infos))
 
 def publish_everything():
     global smart_system
