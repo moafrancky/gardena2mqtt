@@ -8,13 +8,16 @@ from gardena.smart_system import SmartSystem
 import paho.mqtt.client as mqtt
 
 def publish_device(device):
-    deviceLocation = device.location.name
-    mqttclient.publish(f"{mqttprefix}/{deviceLocation}/{device.name}/datetime", time.strftime("%Y-%m-%d %H:%M:%S"), 0, True)
+    infos = {"datetime":time.strftime("%Y-%m-%d %H:%M:%S")}
+    mqttclient.publish(f"{mqttprefix}/{device.location.name}/{device.name}/datetime", time.strftime("%Y-%m-%d %H:%M:%S"), 0, True)
 
     for attrName in vars(device):
         if not attrName.startswith('_') and attrName not in ('location', 'callbacks'):
+            infos[attrName] = getattr(device, attrName)
             attrValue = getattr(device, attrName)
-            mqttclient.publish(f"{mqttprefix}/{deviceLocation}/{device.name}/{attrName}", attrValue, 0, True)
+            mqttclient.publish(f"{mqttprefix}/{device.location.name}/{device.name}/{attrName}", attrValue, 0, True)
+
+    mqttclient.publish(f"{mqttprefix}/{device.location.name}/{device.name}", json.dumps(infos), 0, True)
 
 def publish_everything():
     global smart_system
