@@ -145,7 +145,7 @@ def on_ws_status_changed(status):
             publish_everything()
 
 def on_device_update(device):
-    print(f"The device {device.name} has been updated !")
+    logging.info(f"The device {device.name} has been updated !")
     if mqttclientconnected:
         publish_device(device)
 
