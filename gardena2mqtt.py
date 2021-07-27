@@ -18,6 +18,7 @@ def publish_device(device):
 
 def publish_everything():
     global smart_system
+    logging.info("Publish Everything")
     for location in smart_system.locations.values():
         for device in location.devices.values():
             publish_device(device)
