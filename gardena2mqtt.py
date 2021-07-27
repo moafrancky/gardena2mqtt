@@ -17,7 +17,9 @@ def publish_device(device):
             attrValue = getattr(device, attrName)
             mqttclient.publish(f"{mqttprefix}/{device.location.name}/{device.name}/{attrName}", attrValue, 0, True)
 
-    mqttclient.publish(f"{mqttprefix}/{device.location.name}/{device.name}", json.dumps(infos), 0, True)
+    jsonPayload = json.dumps(infos)
+    mqttclient.publish(f"{mqttprefix}/{device.location.name}/{device.name}", jsonPayload, 0, True)
+    logging.info(f"Publish {mqttprefix}/{device.location.name}/{device.name} = {jsonPayload}")
 
 def publish_everything():
     global smart_system
