@@ -1,6 +1,6 @@
 FROM python:3-alpine
 
-RUN pip install py-smart-gardena paho-mqtt backoff
+RUN pip install py-smart-gardena paho-mqtt backoff httpx
 
 WORKDIR /app
 
