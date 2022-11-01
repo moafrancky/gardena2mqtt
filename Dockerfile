@@ -1,6 +1,6 @@
 FROM python:3-alpine
 
-RUN apk add libffi-dev
+RUN apk add gcc libc-dev libffi-dev
 
 WORKDIR /app
 
