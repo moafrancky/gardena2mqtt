@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         id: docker_build
         with:
-          platforms: linux/arm/v7,linux/arm64,linux/amd64
+          platforms: linux/arm64,linux/amd64
           push: true
           tags: moafrancky/gardena2mqtt:${{ env.DOCKERTAG }}
       - name: Image digest
