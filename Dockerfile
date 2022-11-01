@@ -1,6 +1,6 @@
 FROM python:3-alpine
 
-RUN apk add gcc libc-dev libffi-dev
+RUN apk add gcc libc-dev libffi-dev rustc
 
 WORKDIR /app
 
