@@ -43,9 +43,8 @@ services:
     devices:
     - /dev/serial/by-id/usb-HUAWEI_HUAWEI_Mobile-if00-port0:/dev/mobile
     environment:
-    - GARDENA_USER=GardenaUserName
-    - GARDENA_PASSWORD=GardenaPassword
     - GARDENA_APIKEY=GardenaApiKey
+    - GARDENA_SECRET=GardenaSecret
     - HOST=192.168.1.x
     - PORT=1883
     - PREFIX=gardena2mqtt
@@ -60,9 +59,8 @@ services:
 ### Parameters explanation
 
 #### Environment variables
-* `GARDENA_USER`: Gardena username (it's an email address)
-* `GARDENA_PASSWORD`: Gardena password
 * `GARDENA_APIKEY`: Gardena Application key you got at https://developer.husqvarnagroup.cloud/apps
+* `GARDENA_APIKEY`: Gardena Application secret you got at https://developer.husqvarnagroup.cloud/apps
 * `HOST`: IP address or hostname of your MQTT broker
 * `PORT`: **Optional**, port of your MQTT broker
 * `PREFIX`: **Optional**, prefix used in topics for subscribe/publish
